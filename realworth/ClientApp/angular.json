@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "realworth"
+  "defaultProject": "realworth",
+  "cli": {
+    "analytics": false
+  }
 }
