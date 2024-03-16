@@ -31,8 +31,8 @@ bootstrapApplication(AppComponent, {
         provideHttpClient(withInterceptorsFromDi()),
         provideRouter([
             { path: '', component: HomeComponent, pathMatch: 'full' },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+            // { path: 'counter', component: CounterComponent },
+            // { path: 'fetch-data', component: FetchDataComponent },
         ])
     ]
 })
