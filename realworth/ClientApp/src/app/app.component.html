@@ -1,7 +1,25 @@
-<body>
-  <app-nav-menu></app-nav-menu>
-  <main class="container">
-    <router-outlet></router-outlet>
-  </main>
-</body>
+<style>
+</style>
 
+
+<main class="main">
+  <div class="min-h-full">
+    <app-navigation-bar (showPPPChange)="handleShowPPPChange($event)" (showMapChange)="handleShowMapChange($event)"></app-navigation-bar>
+    <div class="py-10">
+      <header>
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-900">Dashboard</h1>
+        </div>
+      </header>
+      <main>
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <!-- <app-purchasing-power *ngIf="showPPP"> </app-purchasing-power>
+          <app-world-income-map *ngIf="showMap"></app-world-income-map> -->
+
+          <!-- if using url redirecting use this -->
+          <!-- <router-outlet></router-outlet> -->
+        </div>
+      </main>
+    </div>
+  </div>
+</main>
