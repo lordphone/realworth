@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { SelectMenuComponent } from '../select-menu/select-menu.component';
 
 @Component({
   selector: 'app-purchasing-power',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule, SelectMenuComponent],
   templateUrl: './purchasing-power.component.html',
   styleUrls: ['./purchasing-power.component.css']
 })
 export class PurchasingPowerComponent {
   // country list, fetch later from API
   countries = ['USA', 'India', 'Canada', 'China'];
+  selectedCountry: string;
 
   // default countries
   left = {
@@ -25,7 +29,9 @@ export class PurchasingPowerComponent {
   };
 
   // probably for api later?
-  constructor() {}
+  constructor() {
+    this.selectedCountry = this.countries[0];
+  }
 
   convertPPP(side: 'left' | 'right'): void {
     // Implement conversion logic here
