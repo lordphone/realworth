@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { SelectMenuComponent } from '../select-menu/select-menu.component';
+import { NumberInputGroupComponent } from '../number-input-group/number-input-group.component';
 
 @Component({
   selector: 'app-purchasing-power',
   standalone: true,
-  imports: [FormsModule, CommonModule, SelectMenuComponent],
+  imports: [FormsModule, CommonModule, SelectMenuComponent, NumberInputGroupComponent],
   templateUrl: './purchasing-power.component.html',
   styleUrls: ['./purchasing-power.component.css']
 })

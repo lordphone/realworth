@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { ProfileDropdownComponent } from './profile-dropdown/profile-dropdown.component';
 import { SelectMenuComponent } from './select-menu/select-menu.component';
+import { NumberInputGroupComponent } from './number-input-group/number-input-group.component';
 
 @NgModule({
     imports: [ServerModule],
@@ -11,7 +12,8 @@ import { SelectMenuComponent } from './select-menu/select-menu.component';
     declarations: [
       NavigationBarComponent,
       ProfileDropdownComponent,
-      SelectMenuComponent
+      SelectMenuComponent,
+      NumberInputGroupComponent
     ]
 })
 export class AppServerModule { }
