@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -15,13 +15,15 @@ export class NumberInputGroupComponent {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      // Ensure the input is numeric and not empty
-      amount: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
+      amountInput: [0, [Validators.required, Validators.pattern("^[0-9]*$")]]
     });
   }
 
-  get validInput(): boolean {
-    // Return the form control's validity or false if undefined
-    return this.form.get('amount')?.valid ?? true;
+  get amountInput() {
+    return this.form.get('amountInput') as FormControl;
+  }
+
+  get validInput() {
+    return this.amountInput.valid;
   }
 }
