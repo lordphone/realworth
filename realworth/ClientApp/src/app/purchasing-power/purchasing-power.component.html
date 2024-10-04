@@ -10,7 +10,7 @@
                 <div class="basis-2/6 flex justify-center items-center font-mono">
                     You live in
                     <app-select-menu class="px-2"></app-select-menu>
-                    and spend the local currency
+                    and spend the currency
                     <app-select-menu class="px-2"></app-select-menu>
                     .
                 </div>
@@ -35,13 +35,35 @@
               <div class="w-full border-t border-gray-300"></div>
             </div>
             <div class="relative flex justify-center">
-              <span class="bg-white px-3 text-base font-semibold leading-6 text-gray-900">has similar purchasing power to</span>
+              <span class="bg-white px-3 font-mono leading-6 text-gray-900">has similar purchasing power to</span>
             </div>
         </div>
 
-        <div class="basis-1/2">
+        <div class="basis-1/2 flex flex-row">
         <!-- Content goes here -->
-
+            <!-- text and selection boxes -->
+            <div class="flex flex-col basis-3/4">
+                <div class="basis-1/6"></div>
+                    <div class="basis-2/6 flex justify-center items-center font-mono">
+                        <app-number-input-group class="px-2"></app-number-input-group>
+                        of the local currency
+                    </div>
+                    <div class="basis-2/6 flex justify-center items-center font-mono">
+                        <app-select-menu class="px-2"></app-select-menu>
+                        in the country
+                        <app-select-menu class="px-2"></app-select-menu>
+                        .
+                    </div>
+                <div class="basis-1/6"></div>
+            </div>
+            <div class="basis-1/4 flex flex-col">
+                <div class="basis-1/2">
+                    exchange rate
+                </div>
+                <div class="basis-1/2">
+                    median income
+                </div>
+            </div>
         </div>
     </div>
 </div>
