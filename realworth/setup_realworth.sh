@@ -29,17 +29,21 @@ sudo systemctl start nginx
 # build angular frontend
 cd "$ANGULAR_PROJECT_DIR"
 npm install
+sudo rm -rf dist
 ng build --configuration production
 
 # deploy angular frontend
 sudo rm -rf "$FRONTEND_BUILD_DIR"
+sudo mkdir -p "$FRONTEND_BUILD_DIR"
 sudo cp -r dist/* "$FRONTEND_BUILD_DIR"
 sudo chown -R nginx:nginx "$FRONTEND_BUILD_DIR"
 sudo chmod -R 755 "$FRONTEND_BUILD_DIR"
 
 # publish dotnet backend
 cd "$DOTNET_PROJECT_DIR"
-dotnet publish -c Release -o "$BACKEND_PUBLISH_DIR"
+sudo rm -rf "$BACKEND_PUBLISH_DIR"
+sudo mkdir -p "$BACKEND_PUBLISH_DIR"
+sudo dotnet publish -c Release -o "$BACKEND_PUBLISH_DIR"
 sudo chown -R nginx:nginx "$BACKEND_PUBLISH_DIR"
 sudo chmod -R 755 "$BACKEND_PUBLISH_DIR"
 
@@ -92,7 +96,7 @@ User=ec2-user
 Environment=ASPNETCORE_ENVIRONMENT=Production
 
 [Install]
-WantBy=multi-user.target
+WantedBy=multi-user.target
 EOT
 
 # reload systemd and start service
