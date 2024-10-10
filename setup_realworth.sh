@@ -4,8 +4,8 @@
 set -e
 
 # Variables
-ANGULAR_PROJECT_DIR="/home/ec2-user/realworth/ClientApp"
-DOTNET_PROJECT_DIR="/home/ec2-user/realworth"
+ANGULAR_PROJECT_DIR="/home/ec2-user/realworth/frontend"
+DOTNET_PROJECT_DIR="/home/ec2-user/realworth/backend"
 FRONTEND_BUILD_DIR="/var/www/realworth"
 BACKEND_PUBLISH_DIR="/var/www/realworth-backend"
 DOTNET_APP_DLL="realworth.dll"
