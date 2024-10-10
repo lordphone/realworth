@@ -3,6 +3,12 @@
 # Exit if command fails
 set -e
 
+# Check if DOMAIN_OR_IP is set
+if [ -z "$DOMAIN_OR_IP" ]; then
+    echo "DOMAIN_OR_IP is not set"
+    exit 1
+fi
+
 # Variables
 ANGULAR_PROJECT_DIR="/home/ec2-user/realworth/frontend"
 DOTNET_PROJECT_DIR="/home/ec2-user/realworth/backend"
@@ -10,7 +16,6 @@ FRONTEND_BUILD_DIR="/var/www/realworth"
 BACKEND_PUBLISH_DIR="/var/www/realworth-backend"
 DOTNET_APP_DLL="realworth.dll"
 SERVICE_NAME="kestrel-realworth"
-DOMAIN_OR_IP="107.20.40.131"
 
 # update system packages
 sudo dnf update -y
