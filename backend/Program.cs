@@ -1,8 +1,19 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.EntityFrameworkCore;
+using RealWorthspace.Data;
+using RealWorthspace.Services;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers();
 
-builder.Services.AddControllersWithViews();
+// Add the ExchangeRateServices with HttpClient
+builder.Services.AddHostedService<ExchangeRateService>();
+
+// Add the ApplicationDbContext
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 var app = builder.Build();
 
