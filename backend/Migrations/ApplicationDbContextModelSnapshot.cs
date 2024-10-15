@@ -24,16 +24,16 @@ namespace realworth.Migrations
 
             modelBuilder.Entity("RealWorthspace.Models.ExchangeRate", b =>
                 {
-                    b.Property<string>("Currency")
+                    b.Property<string>("currency_code")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<decimal>("Rate")
+                    b.Property<decimal>("rate")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<DateTime>("TimeStamp")
+                    b.Property<DateTime>("timestamp")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("Currency");
+                    b.HasKey("currency_code");
 
                     b.ToTable("ExchangeRates");
                 });

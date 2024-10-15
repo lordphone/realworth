@@ -45,7 +45,7 @@ namespace RealWorthspace.Services
                 foreach (var rate in rates)
                 {
                     // check if the currency exists in the database
-                    var existingRate = await dbContext.ExchangeRates.FindAsync(rate.Currency);
+                    var existingRate = await dbContext.ExchangeRates.FindAsync(rate.currency_code);
                     if (existingRate == null)
                     {
                         // add the new rate to the database
@@ -54,12 +54,12 @@ namespace RealWorthspace.Services
                     else
                     {
                         // update the existing rate in the database
-                        existingRate.Rate = rate.Rate;
-                        existingRate.TimeStamp = rate.TimeStamp;
+                        existingRate.rate = rate.rate;
+                        existingRate.timestamp = rate.timestamp;
                     }
                 }
                 await dbContext.SaveChangesAsync();
-                _logger.LogInformation("Exchange rates updated: {0}", rates[0].TimeStamp);
+                _logger.LogInformation("Exchange rates updated: {0}", rates[0].timestamp);
             }
             catch (Exception ex)
             {
@@ -95,9 +95,9 @@ namespace RealWorthspace.Services
             {
                 rates.Add(new ExchangeRate
                 {
-                    Currency = rate.Key,
-                    Rate = rate.Value,
-                    TimeStamp = ratesData.Date
+                    currency_code = rate.Key,
+                    rate = rate.Value,
+                    timestamp = ratesData.Date
                 });
             }
             return rates;

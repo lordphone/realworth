@@ -12,7 +12,7 @@ using RealWorthspace.Data;
 namespace realworth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241014011010_InitialCreate")]
+    [Migration("20241015194233_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,16 +27,16 @@ namespace realworth.Migrations
 
             modelBuilder.Entity("RealWorthspace.Models.ExchangeRate", b =>
                 {
-                    b.Property<string>("Currency")
+                    b.Property<string>("currency_code")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<decimal>("Rate")
+                    b.Property<decimal>("rate")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<DateTime>("TimeStamp")
+                    b.Property<DateTime>("timestamp")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("Currency");
+                    b.HasKey("currency_code");
 
                     b.ToTable("ExchangeRates");
                 });

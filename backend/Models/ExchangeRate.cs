@@ -7,10 +7,10 @@ namespace RealWorthspace.Models
     {
         [Key]
         [Required]
-        public required string Currency { get; set; } // base currency is USD, target currency is three letters such as "EUR"
+        public required string currency_code { get; set; } // base currency is USD, target currency is three letters such as "EUR"
         [Required]
-        public decimal Rate { get; set; } // 1 USD = Rate target currency
+        public decimal rate { get; set; } // 1 USD = Rate target currency
         [Required]
-        public DateTime TimeStamp { get; set; }
+        public DateTime timestamp { get; set; }
     }
 }

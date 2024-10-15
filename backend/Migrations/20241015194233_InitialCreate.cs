@@ -18,14 +18,14 @@ namespace realworth.Migrations
                 name: "ExchangeRates",
                 columns: table => new
                 {
-                    Currency = table.Column<string>(type: "varchar(255)", nullable: false)
+                    currency_code = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Rate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    TimeStamp = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    rate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExchangeRates", x => x.Currency);
+                    table.PrimaryKey("PK_ExchangeRates", x => x.currency_code);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
         }
