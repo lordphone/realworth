@@ -10,8 +10,15 @@ builder.Services.AddControllers();
 // Add the ExchangeRateServices with HttpClient
 builder.Services.AddHostedService<ExchangeRateService>();
 
+// Build the connection string from environment variables
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbUser = Environment.GetEnvironmentVariable("DB_USER");
+var dbPass = Environment.GetEnvironmentVariable("DB_PASS");
+
+var connectionString = $"Server={dbHost};Database={dbName};User={dbUser};Password={dbPass};";
+
 // Add the ApplicationDbContext
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
@@ -27,7 +34,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
 
 app.MapControllerRoute(
     name: "default",

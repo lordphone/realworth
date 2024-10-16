@@ -37,6 +37,37 @@ namespace realworth.Migrations
 
                     b.ToTable("ExchangeRates");
                 });
+
+            modelBuilder.Entity("RealWorthspace.Models.PPPData", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("area")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("currency_code")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("currency_name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal>("rate")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("year")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("PPPData");
+                });
 #pragma warning restore 612, 618
         }
     }
