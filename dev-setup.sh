@@ -27,6 +27,11 @@ cd backend
 # Restore NuGet packages
 dotnet restore
 
+# ef migrations add InitialCreate
+rm -rf Migrations
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
 # Build the project
 dotnet build
 

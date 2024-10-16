@@ -48,11 +48,11 @@ namespace RealWorthspace.Services
                     // TODO update the properties based on the actual response structure
 
                     // check if the PPP data exists in the database
-                    var existingPPP = await dbContext.PPPData.FindAsync(ppp.area);
+                    var existingPPP = await dbContext.PPP.FindAsync(ppp.area);
                     if (existingPPP == null)
                     {
                         // add the new PPP data to the database
-                        dbContext.PPPData.Add(ppp);
+                        dbContext.PPP.Add(ppp);
                     }
                     else
                     {

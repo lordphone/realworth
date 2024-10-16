@@ -12,7 +12,7 @@ using RealWorthspace.Data;
 namespace realworth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241016014636_InitialCreate")]
+    [Migration("20241016035332_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -69,7 +69,7 @@ namespace realworth.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("PPPData");
+                    b.ToTable("PPP");
                 });
 #pragma warning restore 612, 618
         }

@@ -66,7 +66,7 @@ namespace realworth.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("PPPData");
+                    b.ToTable("PPP");
                 });
 #pragma warning restore 612, 618
         }

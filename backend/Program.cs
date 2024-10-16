@@ -7,6 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+});
+
 // Add the ExchangeRateServices with HttpClient
 builder.Services.AddHostedService<ExchangeRateService>();
 
@@ -31,9 +38,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// use CORS
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+// more CORS stuff?
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.MapControllerRoute(
     name: "default",

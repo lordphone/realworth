@@ -31,7 +31,7 @@ namespace realworth.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "PPPData",
+                name: "PPP",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -47,7 +47,7 @@ namespace realworth.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PPPData", x => x.id);
+                    table.PrimaryKey("PK_PPP", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
         }
@@ -59,7 +59,7 @@ namespace realworth.Migrations
                 name: "ExchangeRates");
 
             migrationBuilder.DropTable(
-                name: "PPPData");
+                name: "PPP");
         }
     }
 }
