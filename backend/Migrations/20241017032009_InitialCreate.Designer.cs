@@ -12,7 +12,7 @@ using RealWorthspace.Data;
 namespace realworth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241016214110_InitialCreate")]
+    [Migration("20241017032009_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,37 @@ namespace realworth.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("RealWorthspace.Models.ExchangePppRate", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("area")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("currency_code")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("currency_name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal>("exchange_rate")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("ppp_rate")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("exchange_ppp_rates");
+                });
 
             modelBuilder.Entity("RealWorthspace.Models.ExchangeRate", b =>
                 {

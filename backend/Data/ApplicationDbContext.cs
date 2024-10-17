@@ -9,6 +9,8 @@ namespace RealWorthspace.Data
 
         public DbSet<PPPData> PPP { get; set; }
 
+        public DbSet<ExchangePppRate> exchange_ppp_rates { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
         {

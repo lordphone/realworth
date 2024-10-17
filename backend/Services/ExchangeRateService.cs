@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RealWorthspace.Data;
 using RealWorthspace.Models;
+using Microsoft.EntityFrameworkCore;
 
 // Service class to fetch exchange rate data from an external API
 namespace RealWorthspace.Services
@@ -60,11 +61,42 @@ namespace RealWorthspace.Services
                 }
                 await dbContext.SaveChangesAsync();
                 _logger.LogInformation("Exchange rates updated: {0}", rates[0].timestamp);
+
+                await CreateOrUpdatePPPExchangeRateTableAsync(dbContext);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while updating exchange rates.");
             }
+        }
+
+        private async Task CreateOrUpdatePPPExchangeRateTableAsync(ApplicationDbContext dbContext)
+        {
+            var sql = @"
+                DROP TABLE IF EXISTS exchange_ppp_rates;
+                CREATE TABLE IF NOT EXISTS exchange_ppp_rates (
+                    id INT,
+                    area VARCHAR(255),
+                    currency_name VARCHAR(255),
+                    currency_code VARCHAR(10),
+                    ppp_rate DECIMAL(65, 30),
+                    exchange_rate DECIMAL(65, 30),
+                    PRIMARY KEY (id)
+                );
+
+                INSERT INTO exchange_ppp_rates (id, area, currency_name, currency_code, ppp_rate, exchange_rate)
+                SELECT 
+                    p.id,
+                    p.area,
+                    p.currency_name,
+                    p.currency_code,
+                    p.rate AS ppp_rate,
+                    e.rate AS exchange_rate
+                FROM PPP p
+                LEFT JOIN ExchangeRates e ON p.currency_code = e.currency_code;
+            ";
+
+            await dbContext.Database.ExecuteSqlRawAsync(sql);
         }
 
         private async Task<List<ExchangeRate>> FetchLatestExchangeRatesAsync()
