@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SelectMenuComponent } from '../select-menu/select-menu.component';
 import { NumberInputGroupComponent } from '../number-input-group/number-input-group.component';
+import { ExchangePppRateService, ExchangePppRate } from '../services/exchange-ppp-rate.service';
 
 @Component({
   selector: 'app-purchasing-power',
@@ -11,37 +12,84 @@ import { NumberInputGroupComponent } from '../number-input-group/number-input-gr
   templateUrl: './purchasing-power.component.html',
   styleUrls: ['./purchasing-power.component.css']
 })
-export class PurchasingPowerComponent {
-  // country list, fetch later from API
-  countries = ['USA', 'India', 'Canada', 'China'];
-  selectedCountry: string;
+export class PurchasingPowerComponent implements OnInit {
+  // data from backend
+  exchangePppRates: ExchangePppRate[] = [];
 
-  // default countries
-  left = {
-    country: 'USA',
-    amount: 0,
-    convertedAmount: 0
-  };
-  right = {
-    country: 'China',
-    amount: 0,
-    convertedAmount: 0
-  };
+  topArea: string = 'United States';
+  topAreaId: number = 38;
+  topAmount: number = 0;
+  topCurrencyName: string[] = ['US dollars'];
 
-  // probably for api later?
-  constructor() {
-    this.selectedCountry = this.countries[0];
+  bottomArea: string = 'China (People\'s Republic of)';
+  bottomAreaId: number = 47;
+  bottomAmount: number = 0;
+  bottomCurrencyName: string[] = ['Chinese yuan'];
+  
+  constructor(private exchangePppRateService: ExchangePppRateService) { }
+
+  ngOnInit() {
+    this.loadExchangePppRates();
   }
 
-  convertPPP(side: 'left' | 'right'): void {
-    // Implement conversion logic here
-    // This is a placeholder logic, replace it with actual PPP conversion
-    const conversionRate = 1.2; // Placeholder conversion rate
-    if (side === 'left') {
-      this.left.convertedAmount = this.left.amount * conversionRate;
+  loadExchangePppRates() {
+    this.exchangePppRateService.getExchangePppRates().subscribe({
+      next: data => {
+        data.sort((a, b) => a.area.localeCompare(b.area));
+        this.exchangePppRates = data;
+      },
+      error: err => {
+        console.error('Error fetching rates: ', err);
+      }
+    });
+  }
+
+  onTopAreaChange(area: string) {
+    this.topArea = area;
+    this.topAreaId = this.exchangePppRates.find(rate => rate.area === area)?.id || 38;
+    this.topCurrencyName[0] = this.exchangePppRates.find(rate => rate.area === area)?.currency_name || 'Not Found';
+    this.topAmount = this.convertAmount(this.bottomAmount, this.bottomAreaId, this.topAreaId);
+  }
+
+  onBottomAreaChange(area: string) {
+    this.bottomArea = area;
+    this.bottomAreaId = this.exchangePppRates.find(rate => rate.area === area)?.id || 47;
+    this.bottomCurrencyName[0] = this.exchangePppRates.find(rate => rate.area === area)?.currency_name || 'Not Found';
+    this.bottomAmount = this.convertAmount(this.topAmount, this.topAreaId, this.bottomAreaId);
+  }
+
+  onTopAmountChange(amount: number) {
+    this.topAmount = amount;
+    this.bottomAmount = this.convertAmount(this.topAmount, this.topAreaId, this.bottomAreaId);
+  }
+
+  onBottomAmountChange(amount: number) {
+    this.bottomAmount = amount;
+    this.topAmount = this.convertAmount(this.bottomAmount, this.bottomAreaId, this.topAreaId);
+  }
+
+  convertAmount(amount: number, fromAreaId: number, toAreaId: number): number {
+    const fromPppRate = this.exchangePppRates.find(rate => rate.id === fromAreaId)?.ppp_rate;
+    const toPppRate = this.exchangePppRates.find(rate => rate.id === toAreaId)?.ppp_rate;
+    const fromExchangeRate = this.exchangePppRates.find(rate => rate.id === fromAreaId)?.exchange_rate;
+    const toExchangeRate = this.exchangePppRates.find(rate => rate.id === toAreaId)?.exchange_rate;
+
+    if (fromPppRate && toPppRate && fromExchangeRate && toExchangeRate) {
+      return parseFloat(((amount / fromPppRate) * toPppRate).toFixed(2));
     } else {
-      this.right.convertedAmount = this.right.amount * conversionRate;
+      return 0;
     }
   }
 
+  getAreas(): string[] {
+    return Array.from(new Set(this.exchangePppRates.map(rate => rate.area)));
+  }
+
+  getTopCurrency(): string[] {
+    return this.topCurrencyName;
+  }
+
+  getBottomCurrency(): string[] {
+    return this.bottomCurrencyName;
+  }
 }

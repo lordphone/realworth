@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AreaService } from '../services/area.service';
 import { FormsModule } from '@angular/forms';
 import { NgForOf } from '@angular/common';
@@ -12,31 +12,23 @@ import { NgForOf } from '@angular/common';
   imports: [FormsModule, NgForOf]
 })
 export class SelectMenuComponent {
-  areas: string[] = ['Area 1', 'Area 2', 'Area 3'];
-  selectedArea: string = '';
+  @Input() id: string = '';
+  @Input() areas: string[] = [];
+  @Input() selectedArea: string = 'United States';
+  @Output() selectedAreaChange = new EventEmitter<string>();
+
+  label: string = 'Country / Area';
 
   constructor(private areaService: AreaService) { }
 
   ngOnInit() {
-    this.loadAreas();
-  }
-
-  loadAreas() {
-    this.areaService.getAreas().subscribe({
-      next: data => {
-        this.areas = data;
-        if (this.areas.includes('United States')) {
-          this.selectedArea = 'United States';
-        }
-      },
-      error: err => {
-        console.error('Error fetching areas: ', err);
-      }
-    });
+    if (this.areas.length === 1) {
+      this.label = 'Currency';
+      this.selectedArea = this.areas[0];
+    }
   }
 
   onAreaChange(area: string) {
-    this.selectedArea = area;
-    // preform area update
+    this.selectedAreaChange.emit(area);
   }
 }

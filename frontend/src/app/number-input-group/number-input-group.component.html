@@ -2,7 +2,9 @@
   <label for="amount" class="block text-sm font-medium leading-6 text-gray-900">Currency Amount</label>
   <div class="relative mt-1 rounded-md shadow-sm">
       <input
-        [formControl]="amountInput"
+        
+        [ngModel]="amount"
+        (input)="onUserInput($event)"
         [ngClass]="{'mb-4 text-gray-900 ring-blue-300 placeholder:text-gray-300 focus:ring-blue-500': validInput,
                     'text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500': !validInput}"
         class="block w-full rounded-md border-0 py-1.5 ring-inset ring-1 text-sm leading-6 focus:ring-2"
