@@ -3,8 +3,13 @@
 # Exit if command fails
 set -e
 
-# Source the .secrets file to import variables
-source ./.secrets
+# set environment variables from .secrets file
+source .secrets
+export DB_HOST=$DB_HOST
+export DB_USER=$DB_USER
+export DB_PASS=$DB_PASS
+export DB_NAME=$DB_NAME
+export DOMAIN_OR_IP=$DOMAIN_OR_IP
 
 # Check if DOMAIN_OR_IP is set
 if [ -z "$DOMAIN_OR_IP" ]; then
@@ -49,6 +54,10 @@ sudo chmod -R 755 "$FRONTEND_BUILD_DIR"
 
 # publish dotnet backend
 cd "$DOTNET_PROJECT_DIR"
+dotnet restore
+rm -rf Migrations
+dotnet ef migrations add InitialCreate
+# dotnet ef database update
 sudo rm -rf "$BACKEND_PUBLISH_DIR"
 sudo mkdir -p "$BACKEND_PUBLISH_DIR"
 sudo dotnet publish -c Release -o "$BACKEND_PUBLISH_DIR"
@@ -102,6 +111,10 @@ KillSignal=SIGINT
 SyslogIdentifier=dotnet-realworth
 User=ec2-user
 Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DB_HOST=$DB_HOST
+Environment=DB_USER=$DB_USER
+Environment=DB_PASS=$DB_PASS
+Environment=DB_NAME=$DB_NAME
 
 [Install]
 WantedBy=multi-user.target
