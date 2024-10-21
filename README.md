@@ -1,4 +1,4 @@
-[Link Text](www.real-worth.org)
+[real-worth.org](www.real-worth.org)
 
 ### About
 Purchasing power calculator website built with:
