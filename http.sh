@@ -70,25 +70,6 @@ sudo tee "$NGINX_CONFIG_FILE" > /dev/null <<EOT
 server {
     listen 80;
     server_name real-worth.org www.real-worth.org;
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 443 ssl;
-    server_name real-worth.org www.real-worth.org;
-
-    # SSL Certificate Files
-    ssl_certificate /etc/letsencrypt/live/real-worth.org/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/real-worth.org/privkey.pem;
-
-     # SSL Settings
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers HIGH:!aNULL:!MD5;
-
-    # Security Headers
-    add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload" always;
-    add_header X-Frame-Options SAMEORIGIN always;
-    add_header X-Content-Type-Options nosniff always;
 
     # serve angular frontend
     location / {

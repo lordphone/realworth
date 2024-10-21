@@ -12,7 +12,7 @@ using RealWorthspace.Data;
 namespace realworth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241018133752_InitialCreate")]
+    [Migration("20241021004424_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
