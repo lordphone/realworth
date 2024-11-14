@@ -9,6 +9,7 @@ export interface ExchangePppRate {
     currency_code: string;
     ppp_rate: number;
     exchange_rate: number;
+    timestamp: string;
 }
 
 @Injectable({

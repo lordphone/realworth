@@ -19,5 +19,6 @@ namespace RealWorthspace.Models
         public string currency_code { get; set; }
         public decimal exchange_rate { get; set; }
         public decimal ppp_rate { get; set; }
+        public DateTime timestamp { get; set; }
     }
 }

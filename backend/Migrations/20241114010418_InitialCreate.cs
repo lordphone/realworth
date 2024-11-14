@@ -28,7 +28,8 @@ namespace realworth.Migrations
                     currency_code = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     exchange_rate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    ppp_rate = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
+                    ppp_rate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    timestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {

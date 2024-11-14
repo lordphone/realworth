@@ -19,21 +19,6 @@ export class NumberInputGroupComponent {
   private userInput: boolean = false;
   validInput: boolean = true;
 
-  // constructor(private fb: FormBuilder) {
-  //   this.form = this.fb.group({
-  //     amountInput: [0, [Validators.required, Validators.pattern("^[0-9]*$")]]
-  //   });
-  // }
-
-  // get amountInput() {
-  //   return this.form.get('amountInput') as FormControl;
-  // }
-
-  // get validInput() {
-  //   console.log(this.id, this.userInput);
-  //   return this.amountInput.valid;
-  // }
-
   onAmountChange(value: string) {
     if (this.userInput) {
       const parsedValue = parseFloat(value);

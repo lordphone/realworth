@@ -81,17 +81,19 @@ namespace RealWorthspace.Services
                     currency_code VARCHAR(10),
                     ppp_rate DECIMAL(65, 30),
                     exchange_rate DECIMAL(65, 30),
+                    timestamp datetime(6),
                     PRIMARY KEY (id)
                 );
 
-                INSERT INTO exchange_ppp_rates (id, area, currency_name, currency_code, ppp_rate, exchange_rate)
+                INSERT INTO exchange_ppp_rates (id, area, currency_name, currency_code, ppp_rate, exchange_rate, timestamp)
                 SELECT 
                     p.id,
                     p.area,
                     p.currency_name,
                     p.currency_code,
                     p.rate AS ppp_rate,
-                    e.rate AS exchange_rate
+                    e.rate AS exchange_rate,
+                    timestamp AS timestamp
                 FROM PPP p
                 LEFT JOIN ExchangeRates e ON p.currency_code = e.currency_code;
             ";

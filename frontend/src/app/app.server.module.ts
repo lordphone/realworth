@@ -5,6 +5,8 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { ProfileDropdownComponent } from './profile-dropdown/profile-dropdown.component';
 import { SelectMenuComponent } from './select-menu/select-menu.component';
 import { NumberInputGroupComponent } from './number-input-group/number-input-group.component';
+import { ExchageRateComponent } from './exchage-rate/exchage-rate.component';
+import { ExchangeRateComponent } from './exchange-rate/exchange-rate.component';
 
 @NgModule({
     imports: [ServerModule],
@@ -13,7 +15,9 @@ import { NumberInputGroupComponent } from './number-input-group/number-input-gro
       NavigationBarComponent,
       ProfileDropdownComponent,
       SelectMenuComponent,
-      NumberInputGroupComponent
+      NumberInputGroupComponent,
+      ExchageRateComponent,
+      ExchangeRateComponent
     ]
 })
 export class AppServerModule { }

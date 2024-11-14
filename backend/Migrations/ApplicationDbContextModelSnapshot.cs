@@ -48,6 +48,9 @@ namespace realworth.Migrations
                     b.Property<decimal>("ppp_rate")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<DateTime>("timestamp")
+                        .HasColumnType("datetime(6)");
+
                     b.HasKey("id");
 
                     b.ToTable("exchange_ppp_rates");
