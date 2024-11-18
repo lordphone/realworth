@@ -19,6 +19,11 @@ export class ExchangeRateComponent {
 
   ngOnChanges() {
     this.updateRate();
+    this.updateTime();
+  }
+
+  updateTime() {
+    this.time = new Date(this.timeStamp).toLocaleString();
   }
 
   updateRate() {
