@@ -35,7 +35,10 @@
                     ></app-exchange-rate>
                 </div>
                 <div class="basis-1/2 place-content-center">
-                    median income
+                    <app-median-income
+                        [medianIncome]="topMedianIncome"
+                        [currencyName]="topCurrencyCode"
+                    ></app-median-income>
                 </div>
             </div>
         </div>
@@ -81,7 +84,10 @@
                     ></app-exchange-rate>
                 </div>
                 <div class="basis-1/2 place-content-center">
-                    median income
+                    <app-median-income
+                        [medianIncome]="bottomMedianIncome"
+                        [currencyName]="bottomCurrencyCode"
+                    ></app-median-income>
                 </div>
             </div>
         </div>

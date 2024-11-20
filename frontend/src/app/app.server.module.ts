@@ -7,6 +7,7 @@ import { SelectMenuComponent } from './select-menu/select-menu.component';
 import { NumberInputGroupComponent } from './number-input-group/number-input-group.component';
 import { ExchageRateComponent } from './exchage-rate/exchage-rate.component';
 import { ExchangeRateComponent } from './exchange-rate/exchange-rate.component';
+import { MedianIncomeComponent } from './median-income/median-income.component';
 
 @NgModule({
     imports: [ServerModule],
@@ -17,7 +18,8 @@ import { ExchangeRateComponent } from './exchange-rate/exchange-rate.component';
       SelectMenuComponent,
       NumberInputGroupComponent,
       ExchageRateComponent,
-      ExchangeRateComponent
+      ExchangeRateComponent,
+      MedianIncomeComponent
     ]
 })
 export class AppServerModule { }
